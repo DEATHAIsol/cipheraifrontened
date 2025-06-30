@@ -63,7 +63,7 @@ const ChatInput = ({
           Caution is advised. Do not disclose confidential or sensitive information. You assume full responsibility for all actions taken using this copilot.
         </span>
         <Link href="https://www.lumolabs.ai/lumo-community/report" target="_blank" className="ml-1 text-[#9e4244] hover:underline">
-          Get support from Lumo Team.
+          Get support from Cipher AI Team.
         </Link>
       </div>
     </div>

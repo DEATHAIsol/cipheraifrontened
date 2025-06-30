@@ -327,7 +327,7 @@ export default function ChatPage() {
   // Add state for tracking if stream message has been added
   const [hasAddedStreamMessage, setHasAddedStreamMessage] = useState(false);
   
-  // Check if selected model is a Lumo model
+  // Check if selected model is a Cipher AI model
   const isLumoModel = (modelId: string) => {
     const lumoModels = ['lumo-70b', 'lumo-8b', 'lumo-deepseek-8b'];
     return lumoModels.includes(modelId);
@@ -361,7 +361,7 @@ export default function ChatPage() {
     // Generate a unique message ID for this response
     const newStreamMessageId = `ai-response-${Date.now()}`;
     
-    // Prepare request body - updated to exclude tools for Lumo models
+    // Prepare request body - updated to exclude tools for Cipher AI models
     const requestBody: ChatApiRequest = {
       public_key: walletAddress,
       signature: walletSignature,

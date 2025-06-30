@@ -25,25 +25,25 @@ const AVAILABLE_MODELS: BaseModel[] = [
   { id: "meta-llama/llama-4-maverick", name: "Llama 4 Maverick", description: "High-capacity multimodal language model from Meta", pro: true },
 ];
 
-// New Lumo models
+// New Cipher AI models
 const LUMO_MODELS: LumoModel[] = [
   { 
     id: "lumo-70b", 
-    name: "Lumo-70B-Instruct", 
+    name: "Cipher AI-70B-Instruct", 
     description: "Advanced 70B model fine-tuned for Solana. Excels in coding, complex conversations, and blockchain development.",
     pro: false,
     specialty: "Coding & Conversation"
   },
   { 
     id: "lumo-8b", 
-    name: "Lumo-8B-Instruct", 
+    name: "Cipher AI-8B-Instruct", 
     description: "Efficient 8B model fine-tuned for Solana. Perfect for general conversations and quick responses.",
     pro: false,
     specialty: "General Conversation"
   },
   { 
     id: "lumo-deepseek-8b", 
-    name: "Lumo-DeepSeek-R1-8B", 
+    name: "Cipher AI-DeepSeek-R1-8B", 
     description: "Specialized 8B reasoning model fine-tuned for Solana. Optimized for complex thinking and problem-solving.",
     pro: false,
     specialty: "Reasoning & Thinking"
@@ -310,14 +310,14 @@ const ToolsAndSettingsModal: React.FC<ToolsAndSettingsModalProps> = ({
                 <path d="M5.4 17.8A9 9 0 0 1 9 8.8"></path>
               </svg>
             </div>
-            <h3 className="text-[#3a3238] font-bold text-lg mb-2">Pure Lumo Intelligence</h3>
+            <h3 className="text-[#3a3238] font-bold text-lg mb-2">Pure Cipher AI Intelligence</h3>
             <p className="text-[#3a3238]/70 text-sm mb-4">
-              Lumo models are specialized for Solana, however they are not equipped with tool calling abilities. 
+              Cipher AI models are specialized for Solana, however they are not equipped with tool calling abilities. 
               Switch to Standard mode to access tools.
             </p>
             <div className="inline-flex items-center gap-2 bg-[#9e4244]/10 px-3 py-1.5 rounded-full">
               <div className="w-2 h-2 bg-[#9e4244] rounded-full animate-pulse"></div>
-              <span className="text-[#9e4244] text-xs font-medium">Tools disabled in Lumo mode</span>
+              <span className="text-[#9e4244] text-xs font-medium">Tools disabled in Cipher AI mode</span>
             </div>
           </div>
         </div>
@@ -508,7 +508,7 @@ const ToolsAndSettingsModal: React.FC<ToolsAndSettingsModalProps> = ({
                     <div>
                       <label className="block text-[#3a3238] font-medium mb-1">AI Mode</label>
                       <p className="text-xs text-[#3a3238]/70">
-                        Choose between standard models or Solana-specialized Lumo models
+                        Choose between standard models or Solana-specialized Cipher AI models
                       </p>
                     </div>
                     <div className="flex flex-col items-center gap-2">
@@ -540,7 +540,7 @@ const ToolsAndSettingsModal: React.FC<ToolsAndSettingsModalProps> = ({
                         {isLumoMode ? (
                           <div className="flex items-center gap-1.5">
                             <div className="w-2 h-2 bg-gradient-to-br from-[#9e4244] to-[#d88c6a] rounded-full animate-pulse"></div>
-                            <span>Lumo Mode</span>
+                            <span>Cipher AI Mode</span>
                           </div>
                         ) : (
                           <span>Standard Mode</span>
@@ -556,7 +556,7 @@ const ToolsAndSettingsModal: React.FC<ToolsAndSettingsModalProps> = ({
                         <div className="w-4 h-4 bg-gradient-to-br from-[#9e4244] to-[#d88c6a] rounded-full flex items-center justify-center">
                           <div className="w-2 h-2 bg-white rounded-full"></div>
                         </div>
-                        <span className="text-[#9e4244] font-medium text-sm">Lumo Mode Active</span>
+                        <span className="text-[#9e4244] font-medium text-sm">Cipher AI Mode Active</span>
                       </div>
                       <p className="text-xs text-[#3a3238]/70 ml-6">
                         Using Solana-specialized models with built-in blockchain knowledge
@@ -568,7 +568,7 @@ const ToolsAndSettingsModal: React.FC<ToolsAndSettingsModalProps> = ({
                 {/* Model Selection */}
                 <div>
                   <label className="block text-[#3a3238] font-medium mb-2">
-                    {isLumoMode ? 'Lumo Model' : 'AI Model'}
+                    {isLumoMode ? 'Cipher AI Model' : 'AI Model'}
                   </label>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {(isLumoMode ? LUMO_MODELS : AVAILABLE_MODELS).map(model => {
@@ -611,7 +611,7 @@ const ToolsAndSettingsModal: React.FC<ToolsAndSettingsModalProps> = ({
                             </div>
                           </div>
                           
-                          {/* Specialty badge for Lumo models */}
+                          {/* Specialty badge for Cipher AI models */}
                           {isLumoMode && (model as LumoModel).specialty && (
                             <div className="mb-2">
                               <span className="text-xs px-2 py-1 rounded-full bg-[#5c7c7d]/10 text-[#5c7c7d] font-medium">
@@ -726,7 +726,7 @@ const ToolsAndSettingsModal: React.FC<ToolsAndSettingsModalProps> = ({
                   Tools
                   {isLumoMode && (
                     <span className="text-xs px-2 py-1 rounded-full bg-[#9e4244]/10 text-[#9e4244] font-medium">
-                      Disabled in Lumo Mode
+                      Disabled in Cipher AI Mode
                     </span>
                   )}
                 </h3>
@@ -780,7 +780,7 @@ const ToolsAndSettingsModal: React.FC<ToolsAndSettingsModalProps> = ({
                 </div>
               )}
               
-              {/* Selected tools section - only show if there are any and not in Lumo mode */}
+              {/* Selected tools section - only show if there are any and not in Cipher AI mode */}
               {selectedTools.length > 0 && !isLumoMode && (
                 <div className="mb-6">
                   <h4 className="text-[#3a3238] font-medium text-sm mb-3 flex items-center gap-2">
@@ -850,7 +850,7 @@ const ToolsAndSettingsModal: React.FC<ToolsAndSettingsModalProps> = ({
               <h4 className="font-medium text-[#3a3238]">Current Setup</h4>
               <p className="text-sm text-[#3a3238]/70 mt-1">
                 {getSelectedModelDetails().name} • Temp: {temperature.toFixed(1)} • 
-                {isLumoMode ? 'Lumo Mode' : `${selectedTools.length} tool${selectedTools.length !== 1 ? 's' : ''} enabled`}
+                {isLumoMode ? 'Cipher AI Mode' : `${selectedTools.length} tool${selectedTools.length !== 1 ? 's' : ''} enabled`}
               </p>
             </div>
             

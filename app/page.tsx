@@ -801,7 +801,7 @@ export default function Home() {
           <div className="max-w-5xl mx-auto px-4 flex justify-between items-center relative z-10">
             <p className="text-sm text-[#3a3238] space-grotesk">© 2025 Cipher AI. Cipher AI is open source under AGPL-3.0.</p>
             <Link href="#">
-              <Image src="/lumo-icon.png" alt="Lumo" width={60} height={20} />
+              <Image src="/lumo-icon.png" alt="Cipher AI" width={60} height={20} />
             </Link>
           </div>
         </footer>

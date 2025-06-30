@@ -299,7 +299,7 @@ const ChatMessage = memo(({ message, copiedId, onCopy }: ChatMessageProps) => {
           <div className="relative w-full h-full z-10 flex items-center justify-center ai-icon-inner">
             <Image
               src="/lumo-icon.png"
-              alt="Lumo AI"
+              alt="Cipher AI"
               width={16}
               height={16}
               className="w-5 h-5 drop-shadow-[0_0_2px_rgba(255,255,255,0.7)] z-10"
@@ -321,7 +321,7 @@ const ChatMessage = memo(({ message, copiedId, onCopy }: ChatMessageProps) => {
           <div className="relative w-full h-full z-10 flex items-center justify-center ai-icon-inner">
             <Image
               src="/lumo-icon.png"
-              alt="Lumo AI"
+              alt="Cipher AI"
               width={16}
               height={16}
               className="w-5 h-5 drop-shadow-[0_0_2px_rgba(255,255,255,0.7)] z-10"
