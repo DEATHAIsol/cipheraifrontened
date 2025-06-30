@@ -343,8 +343,8 @@ export default function Home() {
             <header className="w-full max-w-5xl mx-auto pt-20 pb-10 px-4 text-center">
               <div className="mb-6">
                 <Image 
-                  src="/lumo-u.png" 
-                  alt="LUMO-U" 
+                  src="/banner-placeholder.svg" 
+                  alt="CIPHER AI" 
                   width={300}
                   height={100}
                   className="mx-auto"
@@ -357,7 +357,7 @@ export default function Home() {
               {/* Social Icons */}
               <div className="flex justify-center gap-4 mt-4 mb-6">
                 {/* X (Twitter) */}
-                <Link href="https://x.com/lumolabsdotai" target="_blank" className="text-[#9e4244] hover:text-[#8a3a3c] transition-colors">
+                <Link href="https://x.com/" target="_blank" className="text-[#9e4244] hover:text-[#8a3a3c] transition-colors">
                   <Image 
                     src="/x-icon.svg" 
                     alt="X (Twitter)" 
@@ -368,7 +368,7 @@ export default function Home() {
                 </Link>
                 
                 {/* Telegram */}
-                <Link href="https://t.me/lumolabsdotai" target="_blank" className="text-[#9e4244] hover:text-[#8a3a3c] transition-colors">
+                <Link href="https://t.me/" target="_blank" className="text-[#9e4244] hover:text-[#8a3a3c] transition-colors">
                   <Image 
                     src="/tg-icon.svg" 
                     alt="Telegram" 
@@ -379,7 +379,7 @@ export default function Home() {
                 </Link>
                 
                 {/* GitHub */}
-                <Link href="https://github.com/Lumo-Labs-AI" target="_blank" className="text-[#9e4244] hover:text-[#8a3a3c] transition-colors">
+                <Link href="https://github.com/" target="_blank" className="text-[#9e4244] hover:text-[#8a3a3c] transition-colors">
                   <Image 
                     src="/github-icon.svg" 
                     alt="GitHub" 
@@ -390,7 +390,7 @@ export default function Home() {
                 </Link>
                 
                 {/* Hugging Face */}
-                <Link href="https://huggingface.co/lumolabs-ai" target="_blank" className="text-[#9e4244] hover:text-[#8a3a3c] transition-colors">
+                <Link href="https://huggingface.co/" target="_blank" className="text-[#9e4244] hover:text-[#8a3a3c] transition-colors">
                   <Image 
                     src="/hf-icon.svg" 
                     alt="Hugging Face" 
@@ -401,7 +401,7 @@ export default function Home() {
                 </Link>
                 
                 {/* DEXScreener */}
-                <Link href="https://dexscreener.com/solana/4FkNq8RcCYg4ZGDWh14scJ7ej3m5vMjYTcWoJVkupump" target="_blank" className="text-[#9e4244] hover:text-[#8a3a3c] transition-colors">
+                <Link href="https://dexscreener.com/" target="_blank" className="text-[#9e4244] hover:text-[#8a3a3c] transition-colors">
                   <Image 
                     src="/dex-icon.png" 
                     alt="DEX Screener" 
@@ -538,7 +538,7 @@ export default function Home() {
               
               {/* Redesigned Documentation Button - Matched Size with Wallet Button */}
               <Link
-                href="https://www.lumolabs.ai/lumokit-solana-ai-toolkit-framwork/introduction"
+                href="https://www./lumokit-solana-ai-toolkit-framwork/introduction"
                 target="_blank"
                 className="relative overflow-hidden group
                   px-8 py-4 min-w-[240px] 
@@ -726,7 +726,7 @@ export default function Home() {
                   <div className="relative w-20 h-20 mx-auto mb-4">
                     <div className="absolute inset-0 rounded-full bg-[#9e4244] opacity-10 animate-ping"></div>
                     <Image 
-                      src="/lumo-icon.png" 
+                      src="/icon-placeholder.svg" 
                       alt="No results" 
                       width={60} 
                       height={60} 
@@ -801,7 +801,7 @@ export default function Home() {
           <div className="max-w-5xl mx-auto px-4 flex justify-between items-center relative z-10">
             <p className="text-sm text-[#3a3238] space-grotesk">© 2025 Cipher AI. Cipher AI is open source under AGPL-3.0.</p>
             <Link href="#">
-              <Image src="/lumo-icon.png" alt="Cipher AI" width={60} height={20} />
+              <Image src="/icon-placeholder.svg" alt="Cipher AI" width={60} height={20} />
             </Link>
           </div>
         </footer>

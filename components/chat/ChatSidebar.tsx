@@ -261,7 +261,7 @@ const ChatSidebar = ({
             <div className="flex items-center gap-3 p-4 px-5 border-b border-[#d1c7b9]">
               <div className="relative w-[160px] h-[36px]">
                 <Image
-                  src="/logo.png"
+                  src="/logo-placeholder.svg"
                   alt="Cipher AI Logo"
                   fill
                   style={{ objectFit: "contain" }}
@@ -624,7 +624,7 @@ const ChatSidebar = ({
           <div className="flex flex-col items-center pt-16">
             <div className="relative w-8 h-8">
               <Image
-                src="/lumo-icon.png" 
+                src="/icon-placeholder.svg"
                 alt="Cipher AI Icon"
                 fill
                 style={{ objectFit: "contain" }}

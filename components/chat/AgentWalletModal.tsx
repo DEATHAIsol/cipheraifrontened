@@ -378,7 +378,7 @@ const AgentWalletModal: React.FC<AgentWalletModalProps> = ({
                               onError={(e) => {
                                 // Fallback for broken image
                                 const imgElement = e.target as HTMLImageElement;
-                                imgElement.src = '/lumo-icon.png';
+                                imgElement.src = '/icon-placeholder.svg';
                               }}
                             />
                           </div>
@@ -424,7 +424,7 @@ const AgentWalletModal: React.FC<AgentWalletModalProps> = ({
                                     onError={(e) => {
                                       // Fallback for broken images
                                       const imgElement = e.target as HTMLImageElement;
-                                      imgElement.src = '/lumo-icon.png';
+                                      imgElement.src = '/icon-placeholder.svg';
                                     }}
                                   />
                                 </div>

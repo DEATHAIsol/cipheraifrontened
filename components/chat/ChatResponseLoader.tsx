@@ -7,7 +7,7 @@ const ChatResponseLoader = () => {
       <div className="w-8 h-8 rounded-md flex items-center justify-center mr-3 mt-1 shadow-md ai-icon-container">
         <div className="relative w-full h-full z-10 flex items-center justify-center ai-icon-inner">
           <Image
-            src="/lumo-icon.png"
+            src="/icon-placeholder.svg"
             alt="Cipher AI"
             width={16}
             height={16}
