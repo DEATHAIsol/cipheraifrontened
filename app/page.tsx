@@ -351,7 +351,7 @@ export default function Home() {
                 />
               </div>
               <p className="max-w-2xl mx-auto text-base leading-relaxed fade-in-up space-grotesk">
-                Cipher AI is a lightweight, AI-powered toolkit designed to provide deep on-chain research and actionable insights across the Solana ecosystem. With a focus on speed, simplicity, and intelligence, Cipher AI allows users to connect their wallets and immediately begin exploring wallet activity, token movements, smart contract interactions, and more—all in real time. Whether you're a trader, developer, or analyst, Cipher AI delivers the tools you need to understand and navigate Solana's on-chain data with ease. The free tier offers 10 requests per day, making it easy to get started without any commitment.
+                Cipher AI is a lightweight, AI-powered toolkit designed to provide deep on-chain research and actionable insights across the Solana ecosystem. With a focus on speed, simplicity, and intelligence, Cipher AI allows users to connect their wallets and immediately begin exploring wallet activity, token movements, smart contract interactions, and more—all in real time. Whether you&apos;re a trader, developer, or analyst, Cipher AI delivers the tools you need to understand and navigate Solana&apos;s on-chain data with ease. The free tier offers 10 requests per day, making it easy to get started without any commitment.
               </p>
 
               {/* Social Icons */}
@@ -538,7 +538,7 @@ export default function Home() {
               
               {/* Redesigned Documentation Button - Matched Size with Wallet Button */}
               <Link
-                href="https://www./lumokit-solana-ai-toolkit-framwork/introduction"
+                href="https://docs.cipher-ai.com"
                 target="_blank"
                 className="relative overflow-hidden group
                   px-8 py-4 min-w-[240px] 
