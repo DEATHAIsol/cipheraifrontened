@@ -286,7 +286,7 @@ const ProUpgradeModal: React.FC<ProUpgradeModalProps> = ({ isOpen, onClose }) =>
             {/* Header content */}
             <div className="relative z-10">
               <h3 className="text-white text-2xl font-bold">Upgrade to Pro</h3>
-              <p className="text-white/80 text-sm mt-1">Enhance your LumoKit experience with premium features</p>
+              <p className="text-white/80 text-sm mt-1">Enhance your Cipher AI experience with premium features</p>
             </div>
           </div>
           

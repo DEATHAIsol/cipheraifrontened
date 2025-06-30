@@ -29,7 +29,7 @@ export default function ChatPage() {
     {
       id: "welcome",
       type: "ai",
-      content: "Hello! Welcome to LumoKit. How can I help you today?",
+      content: "Hello! Welcome to Cipher AI. How can I help you today?",
       timestamp: new Date(),
     },
   ])
@@ -296,7 +296,7 @@ export default function ChatPage() {
       {
         id: "welcome",
         type: "ai",
-        content: "Hello! Welcome to LumoKit. How can I help you today?",
+        content: "Hello! Welcome to Cipher AI. How can I help you today?",
         timestamp: new Date(),
       },
     ]);

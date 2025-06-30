@@ -21,7 +21,7 @@ const bebasNeue = Bebas_Neue({
 })
 
 export const metadata: Metadata = {
-  title: "LumoKit - AI Toolkit for Solana",
+  title: "Cipher AI - AI Toolkit for Solana",
   description: "A lightweight AI Toolkit Framework catering to Solana ecosystem",
   icons: {
     icon: [

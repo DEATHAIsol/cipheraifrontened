@@ -262,7 +262,7 @@ const ChatSidebar = ({
               <div className="relative w-[160px] h-[36px]">
                 <Image
                   src="/logo.png"
-                  alt="LumoKit Logo"
+                  alt="Cipher AI Logo"
                   fill
                   style={{ objectFit: "contain" }}
                   priority
@@ -625,7 +625,7 @@ const ChatSidebar = ({
             <div className="relative w-8 h-8">
               <Image
                 src="/lumo-icon.png" 
-                alt="LumoKit Icon"
+                alt="Cipher AI Icon"
                 fill
                 style={{ objectFit: "contain" }}
                 priority

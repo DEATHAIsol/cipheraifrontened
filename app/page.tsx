@@ -43,7 +43,7 @@ export default function Home() {
     
     try {
       const message = new TextEncoder().encode(
-        `Sign this message for authenticating with LumoKit: ${publicKey.toString()}`
+        `Sign this message for authenticating with Cipher AI: ${publicKey.toString()}`
       )
       
       const sig = await signMessage(message)
@@ -351,10 +351,7 @@ export default function Home() {
                 />
               </div>
               <p className="max-w-2xl mx-auto text-base leading-relaxed fade-in-up space-grotesk">
-                A lightweight AI Toolkit Framework offering a multitude of on-chain actions and researching abilities created by {" "}
-                <span className="text-[#9e4244] font-bold animated-border">Lumo Labs</span> catering to Solana.
-                {" "}<span className="text-[#5c7c7d]">Connect your wallet</span>{" "}
-                and start trying out LumoKit today, free-tier offers 10 requests per day.
+                Cipher AI is a lightweight, AI-powered toolkit designed to provide deep on-chain research and actionable insights across the Solana ecosystem. With a focus on speed, simplicity, and intelligence, Cipher AI allows users to connect their wallets and immediately begin exploring wallet activity, token movements, smart contract interactions, and more—all in real time. Whether you're a trader, developer, or analyst, Cipher AI delivers the tools you need to understand and navigate Solana's on-chain data with ease. The free tier offers 10 requests per day, making it easy to get started without any commitment.
               </p>
 
               {/* Social Icons */}
@@ -802,7 +799,7 @@ export default function Home() {
         {/* Footer with gradient */}
         <footer className="footer-gradient">
           <div className="max-w-5xl mx-auto px-4 flex justify-between items-center relative z-10">
-            <p className="text-sm text-[#3a3238] space-grotesk">© 2025 Lumo Labs. LumoKit is open source under AGPL-3.0.</p>
+            <p className="text-sm text-[#3a3238] space-grotesk">© 2025 Cipher AI. Cipher AI is open source under AGPL-3.0.</p>
             <Link href="#">
               <Image src="/lumo-icon.png" alt="Lumo" width={60} height={20} />
             </Link>
