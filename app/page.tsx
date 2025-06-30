@@ -799,7 +799,7 @@ export default function Home() {
         {/* Footer with gradient */}
         <footer className="footer-gradient">
           <div className="max-w-5xl mx-auto px-4 flex justify-between items-center relative z-10">
-            <p className="text-sm text-[#3a3238] space-grotesk">© 2025 Cipher AI. Cipher AI is open source under AGPL-3.0.</p>
+            <p className="text-sm text-[#3a3238] space-grotesk">© 2025 Cipher AI.</p>
             <Link href="#">
               <Image src="/icon-placeholder.svg" alt="Cipher AI" width={60} height={20} />
             </Link>

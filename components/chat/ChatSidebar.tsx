@@ -358,7 +358,7 @@ const ChatSidebar = ({
                       </div>
                       <div>
                         <span className="font-bold text-sm">Subscription</span>
-                        <span className="text-xs block text-white/90">{PAYMENT_AMOUNT} $LUMO/month</span>
+                        <span className="text-xs block text-white/90">{PAYMENT_AMOUNT} $CIPHER/month</span>
                       </div>
                     </div>
                   </div>
