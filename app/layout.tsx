@@ -4,8 +4,7 @@ import type { Metadata } from "next"
 import { Space_Grotesk, Bebas_Neue } from "next/font/google"
 import WalletContextProvider from "@/components/WalletContextProvider"
 import '@/styles/chat.css'
-import ClientHeaderWrapper from '../components/ClientHeaderWrapper'
-import CursorTrails from '../components/CursorTrails'
+import AppClientShell from '../components/AppClientShell'
 
 // Load Space Grotesk font for body text - more interesting than Inter
 const spaceGrotesk = Space_Grotesk({
@@ -43,10 +42,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${spaceGrotesk.variable} ${bebasNeue.variable} bg-[#e9e4da] min-h-screen`}>
-        <ClientHeaderWrapper />
-        <CursorTrails />
         <WalletContextProvider>
-          {children}
+          <AppClientShell>
+            {children}
+          </AppClientShell>
         </WalletContextProvider>
       </body>
     </html>
