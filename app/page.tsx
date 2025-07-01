@@ -840,6 +840,7 @@ function FAQAccordion() {
           <div
             className={`overflow-hidden transition-all duration-500 ${openIdx === idx ? 'max-h-40 mt-4 opacity-100' : 'max-h-0 opacity-0'}`}
           >
+            {/* eslint-disable-next-line react/no-unescaped-entities */}
             <p className="text-[#5c7c7d] text-base">{faq.a}</p>
           </div>
         </div>
