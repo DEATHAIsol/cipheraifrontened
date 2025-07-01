@@ -46,7 +46,7 @@ export default function Home() {
     let frame: number;
     let start: number | null = null;
     let scrollWidth = 0;
-    let duration = 10000;
+    const duration = 10000;
     if (carousel) {
       scrollWidth = carousel.scrollWidth / 2; // since we duplicate images
     }
@@ -383,7 +383,6 @@ export default function Home() {
       }
     }
     typeNext();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
