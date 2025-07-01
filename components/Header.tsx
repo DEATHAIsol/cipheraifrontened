@@ -8,13 +8,6 @@ export default function Header() {
   const [showConnectWarning, setShowConnectWarning] = useState(false);
   const { connected } = useWallet();
 
-  const handleChatClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!connected) {
-      e.preventDefault();
-      setShowConnectWarning(true);
-    }
-  };
-
   return (
     <header className="w-full bg-white/80 backdrop-blur-md shadow-sm rounded-b-xl px-4 py-2 flex items-center justify-between z-50 sticky top-0 relative">
       {/* Left: Brand name */}
