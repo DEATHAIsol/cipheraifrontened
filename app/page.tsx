@@ -3,7 +3,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { useEffect, useState, useRef, useCallback } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { useWallet } from "@solana/wallet-adapter-react"
 import { useWalletModal } from "@solana/wallet-adapter-react-ui"
 import toolsData from "@/data/tools.json"
@@ -24,7 +24,6 @@ export default function Home() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const cursorTrailsRef = useRef<HTMLDivElement[]>([])
   const router = useRouter()
-  const searchParams = useSearchParams()
   
   // Tool integrations state
   const [searchTerm, setSearchTerm] = useState("")
@@ -329,12 +328,6 @@ export default function Home() {
     return () => {
     }
   }, [connected])
-
-  useEffect(() => {
-    if (searchParams?.get("connectWallet") === "1") {
-      setShowConnectModal(true);
-    }
-  }, [searchParams]);
 
   return (
     <div className="page-container">
