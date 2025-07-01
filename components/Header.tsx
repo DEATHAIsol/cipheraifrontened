@@ -6,7 +6,6 @@ import { useWallet } from "@solana/wallet-adapter-react";
 export default function Header() {
   const [socialsOpen, setSocialsOpen] = useState(false);
   const [showConnectWarning, setShowConnectWarning] = useState(false);
-  const { connected } = useWallet();
 
   return (
     <header className="w-full bg-white/80 backdrop-blur-md shadow-sm rounded-b-xl px-4 py-2 flex items-center justify-between z-50 sticky top-0 relative">
