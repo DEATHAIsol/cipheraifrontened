@@ -4,7 +4,6 @@ import { useState } from 'react';
 
 export default function Header() {
   const [socialsOpen, setSocialsOpen] = useState(false);
-  const [showConnectWarning, setShowConnectWarning] = useState(false);
 
   return (
     <header className="w-full bg-white px-8 py-3 flex items-center justify-between shadow-sm">

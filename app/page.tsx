@@ -362,8 +362,8 @@ export default function Home() {
   const [boxVisible, setBoxVisible] = useState([false, false, false]);
   useEffect(() => {
     const timeouts = [
-      setTimeout(() => setBoxVisible(v => [true, false, false]), 100),
-      setTimeout(() => setBoxVisible(v => [true, true, false]), 700),
+      setTimeout(() => setBoxVisible([true, false, false]), 100),
+      setTimeout(() => setBoxVisible([true, true, false]), 700),
       setTimeout(() => setBoxVisible([true, true, true]), 1300),
     ];
     return () => timeouts.forEach(clearTimeout);
@@ -716,10 +716,7 @@ export default function Home() {
   )
 }
 
-// Helper function to shorten wallet address
-const shortenAddress = (address: string) => {
-  return `${address.slice(0, 2)}..${address.slice(-2)}`
-}
+
 
 // Extracted Tool Card Component for cleaner code and consistent styling
 const ToolCard = ({ 
