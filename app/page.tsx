@@ -38,6 +38,35 @@ export default function Home() {
   const [isSigning, setIsSigning] = useState(false)
   const [showConnectModal, setShowConnectModal] = useState(false)
 
+  // Carousel auto-scroll logic
+  const carouselRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+    let frame: number;
+    let start: number | null = null;
+    let scrollWidth = 0;
+    let duration = 10000;
+    if (carousel) {
+      scrollWidth = carousel.scrollWidth / 2; // since we duplicate images
+    }
+
+    function step(timestamp: number) {
+      if (!carousel) return;
+      if (!start) start = timestamp;
+      const elapsed = (timestamp - start) % duration;
+      const progress = elapsed / duration;
+      carousel.scrollLeft = progress * scrollWidth;
+      frame = requestAnimationFrame(step);
+    }
+
+    frame = requestAnimationFrame(step);
+
+    return () => {
+      cancelAnimationFrame(frame);
+    };
+  }, []);
+
   // Handle signature request - using useCallback to avoid dependency cycle
   const handleSignMessage = useCallback(async () => {
     if (!publicKey || !signMessage || isLoading) return
@@ -329,6 +358,34 @@ export default function Home() {
     }
   }, [connected])
 
+  // Animation for feature boxes
+  const [boxVisible, setBoxVisible] = useState([false, false, false]);
+  useEffect(() => {
+    const timeouts = [
+      setTimeout(() => setBoxVisible(v => [true, false, false]), 100),
+      setTimeout(() => setBoxVisible(v => [true, true, false]), 700),
+      setTimeout(() => setBoxVisible([true, true, true]), 1300),
+    ];
+    return () => timeouts.forEach(clearTimeout);
+  }, []);
+
+  // Typing animation for hero heading
+  const heroText = 'Your AI powered\nAssistant for Solana';
+  const [typedHero, setTypedHero] = useState('');
+  useEffect(() => {
+    let i = 0;
+    const text = heroText;
+    function typeNext() {
+      setTypedHero(text.slice(0, i + 1));
+      i++;
+      if (i < text.length) {
+        setTimeout(typeNext, 80);
+      }
+    }
+    typeNext();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className="page-container">
       {/* Background Pattern */}
@@ -336,155 +393,122 @@ export default function Home() {
 
       {/* Full page grid background */}
       <div className="full-page-grid">
-        {/* Hero Section with Clean Background */}
-        <div className="w-full relative overflow-hidden">
-          {/* Hero Content */}
-          <div className="relative z-10 flex flex-col items-center">
-            {/* Header */}
-            <header className="w-full max-w-5xl mx-auto pt-20 pb-10 px-4 text-center">
-              <div className="mb-6">
-                <Image 
-                  src="/banner-placeholder.svg" 
-                  alt="CIPHER AI" 
-                  width={300}
-                  height={100}
-                  className="mx-auto"
-                />
-              </div>
-              <p className="max-w-2xl mx-auto text-base leading-relaxed fade-in-up space-grotesk">
-                Cipher AI is a lightweight, AI-powered toolkit designed to provide deep on-chain research and actionable insights across the Solana ecosystem. With a focus on speed, simplicity, and intelligence, Cipher AI allows users to connect their wallets and immediately begin exploring wallet activity, token movements, smart contract interactions, and more—all in real time. Whether you&apos;re a trader, developer, or analyst, Cipher AI delivers the tools you need to understand and navigate Solana&apos;s on-chain data with ease. The free tier offers 10 requests per day, making it easy to get started without any commitment.
-              </p>
-              {!(connected && (signature || (typeof window !== 'undefined' && localStorage.getItem('walletSignature')))) && (
-                <div className="w-full flex justify-center mt-4 mb-2">
-                  <span className="text-[#9e4244] font-bold text-lg uppercase tracking-wide text-center">CONNECT WALLET TO START CHATTING!</span>
-                </div>
+        {/* Hero Section - Two Column Layout */}
+        <section className="w-full max-w-7xl mx-auto pt-20 pb-10 px-4 flex flex-col md:flex-row items-center justify-between gap-8">
+          {/* Left: Text and Button */}
+          <div className="flex-1 flex flex-col items-start justify-center max-w-xl">
+            <h1 className="text-5xl md:text-6xl font-extrabold text-[#232021] mb-6 leading-tight whitespace-pre-line">
+              {typedHero}
+            </h1>
+            <p className="text-lg text-[#5c7c7d] mb-8">The Solana Ecosystem, At Your Command.</p>
+            <button
+              onClick={handleConnectWallet}
+              className={`
+                relative overflow-hidden group
+                px-8 py-4 min-w-[220px]
+                font-bold tracking-wide space-grotesk-bold
+                rounded-full text-white text-lg
+                bg-[#3b5b6d] hover:bg-[#2d4655] transition-all duration-300
+                shadow-lg
+                border-0 outline-none focus:outline-none
+                ${isLoading || isSigning ? "cursor-wait opacity-80" : "cursor-pointer"}
+              `}
+              disabled={isLoading || isSigning}
+            >
+              {isLoading ? (
+                <span>Loading...</span>
+              ) : isSigning ? (
+                <span>Signing...</span>
+              ) : connected && (signature || localStorage.getItem("walletSignature")) ? (
+                <span>Start Chatting</span>
+              ) : (
+                <span>Connect Wallet</span>
               )}
-            </header>
-
-            {/* Action Buttons - Immersive redesign */}
-            <div className="flex justify-center mb-20 fade-in-up delay-100">
-              <button
-                onClick={handleConnectWallet}
-                className={`
-                  relative overflow-hidden group
-                  px-8 py-4 min-w-[240px] 
-                  font-bold tracking-wide space-grotesk-bold
-                  transition-all duration-500
-                  border-0 outline-none focus:outline-none
-                  ${
-                    isLoading || isSigning
-                      ? "cursor-wait opacity-80"
-                      : "cursor-pointer"
-                  }
-                `}
-                disabled={isLoading || isSigning}
-              >
-                {/* Multi-layered button design */}
-                <span className={`
-                  absolute inset-0 transform transition-transform duration-700
-                  ${isLoading || isSigning ? "" : "group-hover:scale-105 group-active:scale-95"}
-                `}>
-                  {/* Base layer - glow effect */}
-                  <span className={`
-                    absolute inset-0 rounded-xl transform blur-sm
-                    ${connected && signature 
-                      ? "bg-gradient-to-r from-[#5c7c7d] to-[#4a6a6b]" 
-                      : "bg-gradient-to-r from-[#a84648] to-[#802f30]"}
-                  `}></span>
-                  
-                  {/* Middle layer - main background */}
-                  <span className={`
-                    absolute inset-0 rounded-xl 
-                    ${connected && signature 
-                      ? "bg-gradient-to-br from-[#5c7c7d] to-[#3d5e5f]" 
-                      : "bg-gradient-to-br from-[#9e4244] to-[#7a2a2b]"}
-                  `}></span>
-                  
-                  {/* Top layer - shine effect */}
-                  <span className={`
-                    absolute inset-0 rounded-xl opacity-40
-                    bg-gradient-to-b from-white via-transparent to-transparent 
-                    h-1/3
-                  `}></span>
+            </button>
+            {!(connected && (signature || (typeof window !== 'undefined' && localStorage.getItem('walletSignature')))) && (
+              <div className="w-full flex justify-left mt-10 mb-2">
+                <span className="text-[#9e4244] font-bold text-2xl uppercase tracking-wide text-center" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                  CONNECT WALLET TO START CHATTING!
                 </span>
-                
-                {/* Foreground pattern */}
-                <span className="absolute inset-0 rounded-xl overflow-hidden opacity-10">
-                  <span className="absolute w-full h-full bg-repeat bg-[length:30px_30px]"></span>
-                </span>
-                
-                {/* Animated particles (only visible on hover) */}
-                {!isLoading && !isSigning && (
-                  <>
-                    <span className="absolute top-0 left-1/4 w-1 h-1 rounded-full bg-white opacity-0 group-hover:opacity-70 blur-[1px] transform group-hover:translate-y-12 transition-all duration-1000 delay-100"></span>
-                    <span className="absolute top-0 left-1/2 w-1.5 h-1.5 rounded-full bg-white opacity-0 group-hover:opacity-50 blur-[1px] transform group-hover:translate-y-16 transition-all duration-1500 delay-300"></span>
-                    <span className="absolute top-0 left-3/4 w-1 h-1 rounded-full bg-white opacity-0 group-hover:opacity-60 blur-[1px] transform group-hover:translate-y-10 transition-all duration-1000 delay-500"></span>
-                  </>
-                )}
-                
-                {/* Button content */}
-                <span className="relative z-10 flex items-center justify-center gap-3 text-white">
-                  {isLoading ? (
-                    <>
-                      <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      <span className="tracking-wider">LOADING...</span>
-                    </>
-                  ) : isSigning ? (
-                    <>
-                      <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      <span className="tracking-wider">SIGNING...</span>
-                    </>
-                  ) : connected && (signature || localStorage.getItem("walletSignature")) ? (
-                    <>
-                      <svg className="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="2"/>
-                      </svg>
-                      <div className="flex items-center">
-                        <span className="tracking-wider">START CHATTING</span>
-                        {/* Wallet address pill - horizontal layout instead of vertical */}
-                        <div className="ml-2 px-2 py-0.5 bg-white bg-opacity-20 rounded-full text-xs flex items-center">
-                          <span className="opacity-80">{publicKey ? shortenAddress(publicKey.toString()) : ""}</span>
-                        </div>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <svg className="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" strokeWidth="2"/>
-                        <path d="M12 8V16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                        <path d="M16 12L8 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                      </svg>
-                      <span className="tracking-wider">CONNECT WALLET</span>
-                    </>
-                  )}
-                </span>
-                
-                {/* Interactive pulse effect on hover */}
-                <span className="absolute inset-0 rounded-xl pointer-events-none">
-                  <span className={`
-                    absolute inset-0 rounded-xl transform scale-0 
-                    ${connected && signature 
-                      ? "bg-[#5c7c7d]" 
-                      : "bg-[#9e4244]"}
-                    opacity-0 group-hover:opacity-25 group-hover:scale-100 
-                    transition-all duration-500 group-active:opacity-0
-                  `}></span>
-                </span>
-                
-                {/* Bottom shadow for 3D effect */}
-                <span className="absolute -bottom-1 left-1 right-1 h-2 bg-black opacity-10 blur-sm rounded-full transform 
-                  group-hover:opacity-20 transition-opacity duration-300"></span>
-              </button>
+              </div>
+            )}
+          </div>
+          {/* Right: Video Placeholder */}
+          <div className="flex-1 flex items-center justify-center">
+            <div className="w-full max-w-3xl aspect-video rounded-3xl shadow-2xl overflow-hidden bg-black">
+              <video
+                src="/random.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+                poster="/banner-placeholder.svg"
+              />
             </div>
           </div>
-        </div>
+        </section>
+
+        {/* Feature Boxes Section */}
+        <section className="w-full py-16 flex justify-center items-center">
+          <div className="max-w-7xl w-full px-4 flex flex-col md:flex-row gap-8">
+            {/* Box 1 */}
+            <div className={`flex-1 bg-white rounded-3xl shadow-lg p-8 flex flex-col items-center text-center transition-all duration-700 ${boxVisible[0] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <h3 className="text-2xl md:text-3xl font-bold mb-4 text-[#232021]">Intelligent Asset Optimization</h3>
+              <p className="text-base md:text-lg text-[#3b5b6d]">
+                Cipher AI leverages advanced machine learning algorithms to deliver data-driven insights for optimal asset management. From dynamic market analysis to personalized portfolio strategies, our platform empowers users to make informed, strategic investment decisions with precision and confidence.
+              </p>
+            </div>
+            {/* Box 2 */}
+            <div className={`flex-1 bg-white rounded-3xl shadow-lg p-8 flex flex-col items-center text-center transition-all duration-700 ${boxVisible[1] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <h3 className="text-2xl md:text-3xl font-bold mb-4 text-[#232021]">Real-Time Blockchain Intelligence</h3>
+              <p className="text-base md:text-lg text-[#3b5b6d]">
+                Harness the power of real-time analytics with Cipher AI. Our platform continuously monitors and interprets on-chain activity across the Solana ecosystem, providing actionable intelligence that supports effective asset management, risk assessment, and market trend identification.
+              </p>
+            </div>
+            {/* Box 3 */}
+            <div className={`flex-1 bg-white rounded-3xl shadow-lg p-8 flex flex-col items-center text-center transition-all duration-700 ${boxVisible[2] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <h3 className="text-2xl md:text-3xl font-bold mb-4 text-[#232021]">Integrated Solana Ecosystem Access</h3>
+              <p className="text-base md:text-lg text-[#3b5b6d]">
+                Cipher AI offers a unified interface to the Solana blockchain's most sophisticated tools and platforms. Whether you're managing DeFi positions, participating in token launches, or tracking NFTs and analytics, Cipher AI streamlines the experience—enhancing efficiency, clarity, and control across all operations.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Partner Carousel Section */}
+        <section className="w-full py-10 flex flex-col items-center">
+          <div ref={carouselRef} className="w-full max-w-5xl overflow-x-auto no-scrollbar scrollbar-hide" style={{ scrollBehavior: 'auto' }}>
+            <div className="flex gap-8 items-center px-4" style={{ minWidth: '1400px', width: 'max-content' }}>
+              {/* Carousel Images (duplicated for infinite loop) */}
+              {[
+                { src: '/birdeye.png', alt: 'Birdeye' },
+                { src: '/cmc.png', alt: 'CoinMarketCap' },
+                { src: '/coingecko.png', alt: 'CoinGecko' },
+                { src: '/dexscreener.png', alt: 'Dexscreener' },
+                { src: '/fluxbeam.png', alt: 'Fluxbeam' },
+                { src: '/jupiter.svg', alt: 'Jupiter' },
+                { src: '/raydium.svg', alt: 'Raydium' },
+                { src: '/rugcheck.jpg', alt: 'Rugcheck' },
+                { src: '/solana.png', alt: 'Solana' },
+              ].concat([
+                { src: '/birdeye.png', alt: 'Birdeye' },
+                { src: '/cmc.png', alt: 'CoinMarketCap' },
+                { src: '/coingecko.png', alt: 'CoinGecko' },
+                { src: '/dexscreener.png', alt: 'Dexscreener' },
+                { src: '/fluxbeam.png', alt: 'Fluxbeam' },
+                { src: '/jupiter.svg', alt: 'Jupiter' },
+                { src: '/raydium.svg', alt: 'Raydium' },
+                { src: '/rugcheck.jpg', alt: 'Rugcheck' },
+                { src: '/solana.png', alt: 'Solana' },
+              ]).map(({ src, alt }, i) => (
+                <div key={alt + i} className="bg-white rounded-2xl shadow-md p-4 flex items-center justify-center min-w-[120px] min-h-[80px] h-24 w-32">
+                  <Image src={src} alt={alt} width={100} height={60} className="object-contain max-h-12 max-w-[90px]" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* Content Sections */}
         <div className="w-full">
@@ -661,49 +685,14 @@ export default function Home() {
                 </div>
               )}
             </>
-            
-            {/* Quick stats with visual improvements */}
-            <div className="stats-section mt-12 flex flex-wrap justify-center gap-4">
-              <div className="stat-card group px-5 py-3 bg-[#f5f0e6] rounded-lg flex items-center gap-3 shadow-sm hover:bg-gradient-to-r hover:from-[#f5f0e6] hover:to-[#e9e2d6] transition-all duration-300 cursor-pointer">
-                <div className="w-8 h-8 rounded-full bg-[#9e4244] bg-opacity-10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <svg className="w-4 h-4 text-[#9e4244]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                  </svg>
-                </div>
-                <div>
-                  <span className="text-sm text-[#5c7c7d]">Total Tools:</span>
-                  <span className="text-lg font-bold text-[#3a3238] ml-1">{toolsData.length}</span>
-                </div>
-              </div>
-              
-              <div className="stat-card group px-5 py-3 bg-[#f5f0e6] rounded-lg flex items-center gap-3 shadow-sm hover:bg-gradient-to-r hover:from-[#f5f0e6] hover:to-[#e9e2d6] transition-all duration-300 cursor-pointer">
-                <div className="w-8 h-8 rounded-full bg-[#5c7c7d] bg-opacity-10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <svg className="w-4 h-4 text-[#5c7c7d]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-                  </svg>
-                </div>
-                <div>
-                  <span className="text-sm text-[#5c7c7d]">Categories:</span>
-                  <span className="text-lg font-bold text-[#3a3238] ml-1">{categoriesWithCount.length - 1}</span>
-                </div>
-              </div>
-              
-              <div className="stat-card group px-5 py-3 bg-[#f5f0e6] rounded-lg flex items-center gap-3 shadow-sm hover:bg-gradient-to-r hover:from-[#f5f0e6] hover:to-[#e9e2d6] transition-all duration-300 cursor-pointer">
-                <div className="w-8 h-8 rounded-full bg-[#9e4244] bg-opacity-10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <svg className="w-4 h-4 text-[#9e4244]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <div>
-                  <span className="text-sm text-[#5c7c7d]">Default Enabled:</span>
-                  <span className="text-lg font-bold text-[#3a3238] ml-1">
-                    {toolsData.filter(tool => tool.default_status).length}
-                  </span>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
+
+        {/* FAQ Accordion Section (now at the bottom) */}
+        <section className="w-full max-w-3xl mx-auto py-16 px-4">
+          <h2 className="text-3xl font-bold text-[#3a3238] mb-8 text-center">Frequently Asked Questions</h2>
+          <FAQAccordion />
+        </section>
 
         {/* Footer with gradient */}
         <footer className="footer-gradient">
@@ -819,3 +808,46 @@ const ToolCard = ({
     </div>
   );
 };
+
+// FAQ Accordion Component
+function FAQAccordion() {
+  const faqs = [
+    {
+      q: "What is Cipher AI?",
+      a: "Cipher AI is an AI-powered assistant designed for the Solana ecosystem. It helps you analyze on-chain data, manage assets, and access powerful Solana tools—all in one place.",
+    },
+    {
+      q: "How do I connect my wallet?",
+      a: "Simply click the 'Connect Wallet' button at the top of the page. Cipher AI supports popular Solana wallets and ensures your connection is secure and private.",
+    },
+    {
+      q: "Is my data safe with Cipher AI?",
+      a: "Yes. Cipher AI does not store your private data or require unnecessary permissions. All wallet interactions are handled securely through trusted Solana wallet providers.",
+    },
+    {
+      q: "What can I do with Cipher AI?",
+      a: "You can explore wallet activity, track tokens, analyze smart contracts, and use integrated Solana tools for trading, analytics, and more—all powered by AI.",
+    },
+  ];
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
+  return (
+    <div className="flex flex-col gap-4">
+      {faqs.map((faq, idx) => (
+        <div key={faq.q} className="bg-white rounded-2xl shadow-md p-6 cursor-pointer border border-[#e9e4da]">
+          <button
+            className="w-full flex justify-between items-center text-left focus:outline-none"
+            onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
+          >
+            <span className="text-lg font-semibold text-[#3a3238]">{faq.q}</span>
+            <span className={`ml-4 transition-transform duration-300 ${openIdx === idx ? 'rotate-45' : ''}`}>+</span>
+          </button>
+          <div
+            className={`overflow-hidden transition-all duration-500 ${openIdx === idx ? 'max-h-40 mt-4 opacity-100' : 'max-h-0 opacity-0'}`}
+          >
+            <p className="text-[#5c7c7d] text-base">{faq.a}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
