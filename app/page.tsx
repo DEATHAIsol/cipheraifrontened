@@ -3,7 +3,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { useEffect, useState, useRef, useCallback } from "react"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useWallet } from "@solana/wallet-adapter-react"
 import { useWalletModal } from "@solana/wallet-adapter-react-ui"
 import toolsData from "@/data/tools.json"
@@ -24,6 +24,7 @@ export default function Home() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const cursorTrailsRef = useRef<HTMLDivElement[]>([])
   const router = useRouter()
+  const searchParams = useSearchParams()
   
   // Tool integrations state
   const [searchTerm, setSearchTerm] = useState("")
@@ -36,6 +37,7 @@ export default function Home() {
   const [signature, setSignature] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [isSigning, setIsSigning] = useState(false)
+  const [showConnectModal, setShowConnectModal] = useState(false)
 
   // Handle signature request - using useCallback to avoid dependency cycle
   const handleSignMessage = useCallback(async () => {
@@ -328,6 +330,12 @@ export default function Home() {
     }
   }, [connected])
 
+  useEffect(() => {
+    if (searchParams?.get("connectWallet") === "1") {
+      setShowConnectModal(true);
+    }
+  }, [searchParams]);
+
   return (
     <div className="page-container">
       {/* Background Pattern */}
@@ -353,69 +361,15 @@ export default function Home() {
               <p className="max-w-2xl mx-auto text-base leading-relaxed fade-in-up space-grotesk">
                 Cipher AI is a lightweight, AI-powered toolkit designed to provide deep on-chain research and actionable insights across the Solana ecosystem. With a focus on speed, simplicity, and intelligence, Cipher AI allows users to connect their wallets and immediately begin exploring wallet activity, token movements, smart contract interactions, and more—all in real time. Whether you&apos;re a trader, developer, or analyst, Cipher AI delivers the tools you need to understand and navigate Solana&apos;s on-chain data with ease. The free tier offers 10 requests per day, making it easy to get started without any commitment.
               </p>
-
-              {/* Social Icons */}
-              <div className="flex justify-center gap-4 mt-4 mb-6">
-                {/* X (Twitter) */}
-                <Link href="https://x.com/" target="_blank" className="text-[#9e4244] hover:text-[#8a3a3c] transition-colors">
-                  <Image 
-                    src="/x-icon.svg" 
-                    alt="X (Twitter)" 
-                    width={24} 
-                    height={24} 
-                    className="social-icon"
-                  />
-                </Link>
-                
-                {/* Telegram */}
-                <Link href="https://t.me/" target="_blank" className="text-[#9e4244] hover:text-[#8a3a3c] transition-colors">
-                  <Image 
-                    src="/tg-icon.svg" 
-                    alt="Telegram" 
-                    width={24} 
-                    height={24} 
-                    className="social-icon"
-                  />
-                </Link>
-                
-                {/* GitHub */}
-                <Link href="https://github.com/" target="_blank" className="text-[#9e4244] hover:text-[#8a3a3c] transition-colors">
-                  <Image 
-                    src="/github-icon.svg" 
-                    alt="GitHub" 
-                    width={24} 
-                    height={24} 
-                    className="social-icon"
-                  />
-                </Link>
-                
-                {/* Hugging Face */}
-                <Link href="https://huggingface.co/" target="_blank" className="text-[#9e4244] hover:text-[#8a3a3c] transition-colors">
-                  <Image 
-                    src="/hf-icon.svg" 
-                    alt="Hugging Face" 
-                    width={24} 
-                    height={24} 
-                    className="social-icon"
-                  />
-                </Link>
-                
-                {/* DEXScreener */}
-                <Link href="https://dexscreener.com/" target="_blank" className="text-[#9e4244] hover:text-[#8a3a3c] transition-colors">
-                  <Image 
-                    src="/dex-icon.png" 
-                    alt="DEX Screener" 
-                    width={24} 
-                    height={24} 
-                    className="social-icon"
-                  />
-                </Link>
-              </div>
-
+              {!(connected && (signature || (typeof window !== 'undefined' && localStorage.getItem('walletSignature')))) && (
+                <div className="w-full flex justify-center mt-4 mb-2">
+                  <span className="text-[#9e4244] font-bold text-lg uppercase tracking-wide text-center">CONNECT WALLET TO START CHATTING!</span>
+                </div>
+              )}
             </header>
 
             {/* Action Buttons - Immersive redesign */}
-            <div className="flex flex-col sm:flex-row gap-6 mb-20 fade-in-up delay-100">
+            <div className="flex justify-center mb-20 fade-in-up delay-100">
               <button
                 onClick={handleConnectWallet}
                 className={`
@@ -535,51 +489,6 @@ export default function Home() {
                 <span className="absolute -bottom-1 left-1 right-1 h-2 bg-black opacity-10 blur-sm rounded-full transform 
                   group-hover:opacity-20 transition-opacity duration-300"></span>
               </button>
-              
-              {/* Redesigned Documentation Button - Matched Size with Wallet Button */}
-              <Link
-                href="https://docs.cipher-ai.com"
-                target="_blank"
-                className="relative overflow-hidden group
-                  px-8 py-4 min-w-[240px] 
-                  font-bold tracking-wide space-grotesk-bold
-                  transition-all duration-500
-                  border-0 outline-none focus:outline-none
-                  flex items-center justify-center"
-                aria-label="Documentation"
-              >
-                {/* Multi-layered button design - similar structure to the wallet button */}
-                <span className="absolute inset-0 transform transition-transform duration-700 group-hover:scale-105 group-active:scale-95">
-                  {/* Base layer - glow effect */}
-                  <span className="absolute inset-0 rounded-xl transform blur-sm bg-[#e5e1d8]"></span>
-                  
-                  {/* Middle layer - main background */}
-                  <span className="absolute inset-0 rounded-xl bg-[#f7f3eb]"></span>
-                  
-                  {/* Border overlay */}
-                  <span className="absolute inset-0 rounded-xl border border-[#d1c7b9] opacity-60"></span>
-                  
-                  {/* Top layer - shine effect */}
-                  <span className="absolute inset-0 rounded-xl opacity-30 bg-gradient-to-b from-white via-transparent to-transparent h-1/3"></span>
-                </span>
-
-                {/* Button content - aligned similarly to wallet button */}
-                <span className="relative z-10 flex items-center justify-center gap-3 text-[#9e4244]">
-                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M19 5V19H5V15H3V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3H15V5H19Z" fill="currentColor"/>
-                    <path d="M12 15L13.41 13.59L15.83 16L17.24 14.59L12 9.35L6.76 14.59L8.17 16L10.59 13.59L12 15Z" fill="currentColor"/>
-                  </svg>
-                  <span className="tracking-wider">DOCUMENTATION</span>
-                </span>
-                
-                {/* Interactive pulse effect on hover - similar to wallet button */}
-                <span className="absolute inset-0 rounded-xl pointer-events-none">
-                  <span className="absolute inset-0 rounded-xl transform scale-0 bg-[#9e4244] opacity-0 group-hover:opacity-5 group-hover:scale-100 transition-all duration-500 group-active:opacity-0"></span>
-                </span>
-                
-                {/* Bottom shadow for 3D effect - similar to wallet button */}
-                <span className="absolute -bottom-1 left-1 right-1 h-2 bg-black opacity-5 blur-sm rounded-full transform group-hover:opacity-10 transition-opacity duration-300"></span>
-              </Link>
             </div>
           </div>
         </div>
@@ -601,6 +510,13 @@ export default function Home() {
                 Explore our powerful selection of tools designed to enhance your Solana experience
               </p>
             </div>
+
+            {/* Connect Wallet to Start Chatting Text */}
+            {!(connected && (signature || (typeof window !== 'undefined' && localStorage.getItem('walletSignature')))) && (
+              <div className="w-full flex justify-center mt-8 mb-4">
+                <span className="text-[#9e4244] font-bold text-lg uppercase tracking-wide text-center">CONNECT WALLET TO START CHATTING!</span>
+              </div>
+            )}
 
             {/* Improved Search and Filter Controls */}
             <div className="mb-8 flex flex-col gap-6">
@@ -806,6 +722,14 @@ export default function Home() {
           </div>
         </footer>
       </div>
+
+      {/* Connect Wallet Modal */}
+      {showConnectModal && (
+        <div className="fixed top-6 left-1/2 z-50 -translate-x-1/2 bg-white border border-[#d1c7b9] shadow-lg rounded-xl px-6 py-4 flex items-center gap-3">
+          <span className="text-[#9e4244] font-bold text-lg">Please connect wallet</span>
+          <button onClick={() => setShowConnectModal(false)} className="ml-4 px-2 py-1 rounded bg-[#f5f0e6] hover:bg-[#e9e4da] text-[#3a3238] font-medium">Dismiss</button>
+        </div>
+      )}
     </div>
   )
 }

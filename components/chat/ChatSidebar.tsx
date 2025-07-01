@@ -1,12 +1,13 @@
 import { useState, RefObject, useEffect } from "react";
 import Image from "next/image";
-import { Plus, Settings, Wallet, ChevronLeft, ChevronRight, Copy, CheckCheck, RefreshCw } from "lucide-react";
+import { Plus, Settings, Wallet, ChevronLeft, ChevronRight, Copy, CheckCheck, RefreshCw, Home } from "lucide-react";
 import ProStatusSkeleton from "@/components/chat/ProStatusSkeleton";
 import ConversationSkeleton from "@/components/chat/ConversationSkeleton";
 import ProUpgradeModal from "./ProUpgradeModal";
 import AgentWalletModal from "./AgentWalletModal";
 import ToolsAndSettingsModal from "./ToolsAndSettingsModal";
 import { Conversation } from "@/types/chat";
+import Link from 'next/link';
 
 interface ChatSidebarProps {
   sidebarExpanded: boolean;
@@ -257,21 +258,16 @@ const ChatSidebar = ({
 
         {sidebarExpanded && (
           <>
-            {/* Logo */}
-            <div className="flex items-center gap-3 p-4 px-5 border-b border-[#d1c7b9]">
-              <div className="relative w-[160px] h-[36px]">
-                <Image
-                  src="/logo-placeholder.svg"
-                  alt="Cipher AI Logo"
-                  fill
-                  style={{ objectFit: "contain" }}
-                  priority
-                />
-              </div>
-            </div>
-
             {/* Navigation */}
             <div className="flex-1 overflow-auto py-4 custom-scrollbar">
+              {/* Return Home Box */}
+              <div className="px-4 mb-3">
+                <Link href="/" className="flex items-center gap-2 w-full p-3 rounded-md bg-[#f5f0e6] hover:bg-white border border-[#d1c7b9] text-[#3a3238] font-bold text-base transition-colors">
+                  <Home size={18} className="text-[#9e4244]" />
+                  <span>Return Home</span>
+                </Link>
+              </div>
+
               {/* New Chat Button */}
               <div className="px-4 mb-5">
                 <button 

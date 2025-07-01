@@ -69,7 +69,6 @@ export default function ChatPage() {
     const checkAuth = () => {
       const signature = localStorage.getItem("walletSignature");
       const publicKey = localStorage.getItem("walletPublicKey");
-      
       if (!signature || !publicKey) {
         router.push("/");
       } else {
@@ -79,7 +78,6 @@ export default function ChatPage() {
       }
       setIsLoading(false);
     };
-    
     checkAuth();
   }, [router]);
   
