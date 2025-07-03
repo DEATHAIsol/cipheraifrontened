@@ -131,7 +131,7 @@ const ProUpgradeModal: React.FC<ProUpgradeModalProps> = ({ isOpen, onClose }) =>
         // Handle token account not found or insufficient balance
         if (!hasToken) {
           setHasNoTokens(true);
-          throw new Error(`You do not have any $LUMO tokens in your wallet. Please acquire some tokens before upgrading.`);
+          throw new Error(`You do not have any $CIPHER tokens in your wallet. Please acquire some tokens before upgrading.`);
         }
         
         if (tokenBalance < amount) {
@@ -140,7 +140,7 @@ const ProUpgradeModal: React.FC<ProUpgradeModalProps> = ({ isOpen, onClose }) =>
           const formattedAmount = Number(amount) / (10 ** decimals);
           
           setHasNoTokens(true);
-          throw new Error(`Insufficient balance. You have ${formattedBalance.toLocaleString()} $LUMO but need ${formattedAmount.toLocaleString()} $LUMO tokens.`);
+          throw new Error(`Insufficient balance. You have ${formattedBalance.toLocaleString()} $CIPHER but need ${formattedAmount.toLocaleString()} $CIPHER tokens.`);
         }
 
         // Create transaction and add instructions
@@ -250,7 +250,7 @@ const ProUpgradeModal: React.FC<ProUpgradeModalProps> = ({ isOpen, onClose }) =>
   
   // New function to redirect to DEX
   const redirectToDEX = () => {
-    window.open(`https://jup.ag/swap/SOL-LUMO`, '_blank');
+    window.open(`https://jup.ag/swap/SOL-CIPHER`, '_blank');
   };
   
   if (!isOpen) return null;
@@ -294,7 +294,7 @@ const ProUpgradeModal: React.FC<ProUpgradeModalProps> = ({ isOpen, onClose }) =>
           <div className="absolute top-32 right-6 bg-white/90 backdrop-blur rounded-lg px-3 py-2 shadow-lg">
             <div className="flex items-center gap-1.5">
               <div className="w-3 h-3 bg-[#9e4244] rounded-full"></div>
-              <span className="text-[#9e4244] font-bold">{PAYMENT_AMOUNT} $LUMO</span>
+              <span className="text-[#9e4244] font-bold">{PAYMENT_AMOUNT} $CIPHER</span>
               <span className="text-[#3a3238]/70 text-xs">/month</span>
             </div>
           </div>
@@ -424,7 +424,7 @@ const ProUpgradeModal: React.FC<ProUpgradeModalProps> = ({ isOpen, onClose }) =>
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-xs font-medium text-[#3a3238]/70">Free</span>
                     </div>
-                    <div className="text-sm font-medium">Limited to 3 tools</div>
+                    <div className="text-sm font-medium">Limited to 7 tools</div>
                   </div>
                   <div className="bg-[#9e4244]/10 rounded-md p-2 border border-[#9e4244]/20">
                     <div className="flex items-center justify-between mb-1">
@@ -479,15 +479,15 @@ const ProUpgradeModal: React.FC<ProUpgradeModalProps> = ({ isOpen, onClose }) =>
               {/* No tokens error - show special prompts */}
               {hasNoTokens && (
                 <div className="mt-3 pt-3 border-t border-red-200">
-                  <p className="text-xs font-medium mb-2">You need $LUMO tokens to upgrade:</p>                  
+                  <p className="text-xs font-medium mb-2">You need $CIPHER tokens to upgrade:</p>                  
                   <div className="mt-3 text-xs space-y-1.5">
                     <p className="flex items-center gap-1.5">
                       <span className="inline-block w-4 h-4 bg-red-200 rounded-full text-red-800 flex items-center justify-center text-[10px] font-bold">1</span>
-                      <span>Purchase $LUMO tokens from Jupiter</span>
+                      <span>Purchase $CIPHER tokens from Jupiter</span>
                     </p>
                     <p className="flex items-center gap-1.5">
                       <span className="inline-block w-4 h-4 bg-red-200 rounded-full text-red-800 flex items-center justify-center text-[10px] font-bold">2</span>
-                      <span>Ensure you have at least {PAYMENT_AMOUNT} $LUMO in your wallet</span>
+                      <span>Ensure you have at least {PAYMENT_AMOUNT} $CIPHER in your wallet</span>
                     </p>
                     <p className="flex items-center gap-1.5">
                       <span className="inline-block w-4 h-4 bg-red-200 rounded-full text-red-800 flex items-center justify-center text-[10px] font-bold">3</span>
@@ -518,12 +518,12 @@ const ProUpgradeModal: React.FC<ProUpgradeModalProps> = ({ isOpen, onClose }) =>
               </>
             ) : hasNoTokens ? (
               <>
-                <span>Buy $LUMO Tokens</span>
+                <span>Buy $CIPHER Tokens</span>
                 <ExternalLink size={16} className="group-hover:translate-x-1 transition-transform" />
               </>
             ) : (
               <>
-                <span>Upgrade for {PAYMENT_AMOUNT} $LUMO</span>
+                <span>Upgrade for {PAYMENT_AMOUNT} $CIPHER</span>
                 <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </>
             )}

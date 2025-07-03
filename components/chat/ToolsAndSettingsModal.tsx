@@ -28,21 +28,21 @@ const AVAILABLE_MODELS: BaseModel[] = [
 // New Cipher AI models
 const LUMO_MODELS: LumoModel[] = [
   { 
-    id: "lumo-70b", 
+    id: "Cipher-70b", 
     name: "Cipher AI-70B-Instruct", 
     description: "Advanced 70B model fine-tuned for Solana. Excels in coding, complex conversations, and blockchain development.",
     pro: false,
     specialty: "Coding & Conversation"
   },
   { 
-    id: "lumo-8b", 
+    id: "Cipher-8b", 
     name: "Cipher AI-8B-Instruct", 
     description: "Efficient 8B model fine-tuned for Solana. Perfect for general conversations and quick responses.",
     pro: false,
     specialty: "General Conversation"
   },
   { 
-    id: "lumo-deepseek-8b", 
+    id: "Cipher-deepseek-8b", 
     name: "Cipher AI-DeepSeek-R1-8B", 
     description: "Specialized 8B reasoning model fine-tuned for Solana. Optimized for complex thinking and problem-solving.",
     pro: false,
@@ -89,7 +89,7 @@ const ToolsAndSettingsModal: React.FC<ToolsAndSettingsModalProps> = ({
   const [expandedDescriptions, setExpandedDescriptions] = useState<string[]>([]);
   const [showLimitWarning, setShowLimitWarning] = useState(false);
   const [isLumoMode, setIsLumoMode] = useState(false);
-  const MAX_FREE_TOOLS = 3; // Total tools limit for free users (including default tools)
+  const MAX_FREE_TOOLS = 7; // Total tools limit for free users (including default tools)
   
   // Ensure default tools are selected on component mount
   useEffect(() => {
@@ -753,7 +753,7 @@ const ToolsAndSettingsModal: React.FC<ToolsAndSettingsModalProps> = ({
                   </div>
                   <div>
                     <p className="text-sm text-[#3a3238]">
-                      <span className="font-medium">Free Plan Limitation:</span> You can use up to 3 tools in total.
+                      <span className="font-medium">Free Plan Limitation:</span> You can use up to 7 tools in total.
                       Default tools count towards this limit.
                     </p>
                     <p className="text-xs text-[#9e4244] mt-1">
@@ -774,7 +774,7 @@ const ToolsAndSettingsModal: React.FC<ToolsAndSettingsModalProps> = ({
                       Tool limit reached
                     </p>
                     <p className="text-xs mt-1">
-                      Free users can select up to 3 tools total (including default tools). Upgrade to Pro for unlimited tools.
+                      Free users can select up to 7 tools total (including default tools). Upgrade to Pro for unlimited tools.
                     </p>
                   </div>
                 </div>
