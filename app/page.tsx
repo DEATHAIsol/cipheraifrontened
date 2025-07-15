@@ -432,17 +432,16 @@ export default function Home() {
               </div>
             )}
           </div>
-          {/* Right: Video Placeholder */}
+          {/* Right: Start Picture */}
           <div className="flex-1 flex items-center justify-center">
             <div className="w-full max-w-3xl aspect-video rounded-3xl shadow-2xl overflow-hidden bg-black">
-              <video
-                src="/random.mp4"
-                autoPlay
-                loop
-                muted
-                playsInline
+              <Image
+                src="/startpicture.png"
+                alt="Cipher AI Start Picture"
+                width={800}
+                height={450}
                 className="w-full h-full object-cover"
-                poster="/banner-cipher.png"
+                priority
               />
             </div>
           </div>
