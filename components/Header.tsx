@@ -30,7 +30,7 @@ export default function Header() {
           </button>
           {socialsOpen && (
             <div className="absolute right-0 mt-2 w-40 bg-white border border-[#e9e4da] rounded-lg shadow-lg z-50">
-              <a href="https://x.com/" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 hover:bg-[#f5f0e6]">X (Twitter)</a>
+                              <a href="https://x.com/C1PHERAI" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 hover:bg-[#f5f0e6]">X (Twitter)</a>
               <a href="https://discord.com/" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 hover:bg-[#f5f0e6]">Discord</a>
               <a href="https://dexscreener.com/" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 hover:bg-[#f5f0e6]">Dexscreener</a>
             </div>
