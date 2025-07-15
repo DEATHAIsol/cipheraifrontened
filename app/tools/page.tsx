@@ -133,7 +133,7 @@ export default function ToolsPage() {
           <div className="relative w-20 h-20 mx-auto mb-4">
             <div className="absolute inset-0 rounded-full bg-[#9e4244] opacity-10 animate-ping"></div>
             <Image 
-              src="/icon-placeholder.svg" 
+              src="/chiperailogo.png" 
               alt="No results" 
               width={60} 
               height={60} 
@@ -202,17 +202,7 @@ function ToolCard({
             {tool.description}
           </p>
         </div>
-        {/* Details button */}
-        <a
-          href={tool.read_more}
-          target="_blank"
-          className="text-xs bg-[#f5f0e6] hover:bg-[#9e4244] hover:text-white text-[#9e4244] px-3 py-1 rounded-full transition-colors duration-300 flex items-center gap-1"
-        >
-          <span>Details</span>
-          <svg className="w-3 h-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-          </svg>
-        </a>
+
         {/* Shine effect */}
         <div className="absolute inset-0 overflow-hidden rounded-xl pointer-events-none">
           <div className={`absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white to-transparent opacity-0 group-hover:opacity-20 transition-opacity duration-700 ${

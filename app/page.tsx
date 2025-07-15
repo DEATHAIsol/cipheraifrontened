@@ -442,7 +442,7 @@ export default function Home() {
                 muted
                 playsInline
                 className="w-full h-full object-cover"
-                poster="/banner-placeholder.svg"
+                poster="/banner-cipher.png"
               />
             </div>
           </div>
@@ -657,13 +657,13 @@ export default function Home() {
                 <div className="text-center py-16 bg-[#f5f0e6] rounded-xl border border-[#d1c7b9] transform transition-all hover:scale-[1.01] shadow-sm">
                   <div className="relative w-20 h-20 mx-auto mb-4">
                     <div className="absolute inset-0 rounded-full bg-[#9e4244] opacity-10 animate-ping"></div>
-                    <Image 
-                      src="/icon-placeholder.svg" 
-                      alt="No results" 
-                      width={60} 
-                      height={60} 
-                      className="relative z-10 mx-auto opacity-70"
-                    />
+                                <Image 
+              src="/chiperailogo.png" 
+              alt="No results" 
+              width={60} 
+              height={60} 
+              className="relative z-10 mx-auto opacity-70"
+            />
                   </div>
                   <h3 className="text-lg font-medium text-[#3a3238] mb-2">No tools found</h3>
                   <p className="text-sm text-[#5c7c7d] mb-4 max-w-md mx-auto">
@@ -698,7 +698,7 @@ export default function Home() {
           <div className="max-w-5xl mx-auto px-4 flex justify-between items-center relative z-10">
             <p className="text-sm text-[#3a3238] space-grotesk">© 2025 Cipher AI.</p>
             <Link href="#">
-              <Image src="/icon-placeholder.svg" alt="Cipher AI" width={60} height={20} />
+              <Image src="/chiperailogo.png" alt="Cipher AI" width={60} height={20} />
             </Link>
           </div>
         </footer>
@@ -781,17 +781,6 @@ const ToolCard = ({
           }`}>
             {tool.default_status ? "Default" : "Optional"}
           </span>
-          
-          <Link 
-            href={tool.read_more} 
-            target="_blank"
-            className="text-xs bg-[#f5f0e6] hover:bg-[#9e4244] hover:text-white text-[#9e4244] px-3 py-1 rounded-full transition-colors duration-300 flex items-center gap-1"
-          >
-            <span>Details</span>
-            <svg className="w-3 h-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </Link>
         </div>
         
         {/* Shine effect */}

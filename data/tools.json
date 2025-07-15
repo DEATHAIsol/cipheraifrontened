@@ -1,6 +1,6 @@
 [
   {
-    "icon_url": "/icon-placeholder.svg",
+    "icon_url": "/chiperailogo.png",
     "default_status": true,
     "tool_identifier": "wallet_portfolio_tool",
     "name": "Wallet Portfolio",
@@ -9,7 +9,7 @@
     "read_more": "https://www./tools/wallet-portfolio-tool"
   },
   {
-    "icon_url": "/icon-placeholder.svg",
+    "icon_url": "/chiperailogo.png",
     "default_status": true,
     "tool_identifier": "token_identification_tool",
     "name": "Token Information",

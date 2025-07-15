@@ -26,10 +26,10 @@ export const metadata: Metadata = {
   description: "A lightweight AI Toolkit Framework catering to Solana ecosystem",
   icons: {
     icon: [
-      { url: '/favicon.ico' },
+      { url: '/chiperailogo.png' },
     ],
     apple: [
-      { url: '/favicon.png', sizes: '128x128', type: 'image/png' },
+      { url: '/chiperailogo.png', sizes: '128x128', type: 'image/png' },
     ],
   },
 }

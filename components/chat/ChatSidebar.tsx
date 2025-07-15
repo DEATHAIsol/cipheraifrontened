@@ -619,13 +619,13 @@ const ChatSidebar = ({
         {!sidebarExpanded && (
           <div className="flex flex-col items-center pt-16">
             <div className="relative w-8 h-8">
-              <Image
-                src="/icon-placeholder.svg"
-                alt="Cipher AI Icon"
-                fill
-                style={{ objectFit: "contain" }}
-                priority
-              />
+                          <Image
+              src="/chiperailogo.png"
+              alt="Cipher AI Icon"
+              fill
+              style={{ objectFit: "contain" }}
+              priority
+            />
             </div>
           </div>
         )}
